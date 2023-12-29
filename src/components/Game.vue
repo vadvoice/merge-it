@@ -2,6 +2,9 @@
 import DraggableElement from "./DraggableElement.vue";
 import { onMounted, ref } from "vue";
 import { Icon } from "@iconify/vue";
+import { useElementsStore } from "../stores/ElementsStore";
+
+const store = useElementsStore();
 
 defineProps<{ msg: string }>();
 let topOffset = ref(0);
@@ -10,32 +13,7 @@ let loading = ref(true);
 const headerEl = ref<HTMLElement | null>(null);
 const distance = 200;
 
-const elements = [
-  {
-    id: 1,
-    name: "H",
-    x: 0,
-    y: 0,
-  },
-  {
-    id: 2,
-    name: "O",
-    x: 0,
-    y: 0,
-  },
-  {
-    id: 3,
-    name: "H",
-    x: 0,
-    y: 0,
-  },
-  {
-    id: 4,
-    name: "L",
-    x: 0,
-    y: 0,
-  },
-];
+const elements = store.elements
 
 onMounted(() => {
   topOffset.value = headerEl.value?.clientHeight || 95;
