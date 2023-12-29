@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { useDraggable } from "@vueuse/core";
+import { useElementsStore } from "../stores/ElementsStore";
 const el = ref<HTMLElement | null>(null);
+
+const store = useElementsStore();
 
 // get properties from parent
 const props = defineProps<{
@@ -10,17 +13,23 @@ const props = defineProps<{
     name: string;
     x: number;
     y: number;
+    filter: string;
   };
   initialCoords: {
     x: number;
     y: number;
   };
 }>();
-const { initialCoords } = props;
+const { initialCoords, element } = props;
 
 // `style` will be a helper computed for `left: ?px; top: ?px;`
 const { style } = useDraggable(el, {
   initialValue: initialCoords || { x: 40, y: 40 },
+});
+
+// weird way, could be improved
+watch(style, (newVal) => {
+  store.updateElement(props.element.id, newVal);
 });
 </script>
 
@@ -28,10 +37,10 @@ const { style } = useDraggable(el, {
   <div
     ref="el"
     :style="style"
-    style="position: fixed; user-select: none; cursor: move"
+    style="position: fixed; user-select: none; cursor: move;"
   >
     <img
-      :style="{ pointerEvents: 'none' }"
+      :style="{ pointerEvents: 'none', filter: element.filter, rotate: `${10 * element.id}deg` }"
       src="/liquid.svg"
       alt="Vue logo"
       width="128"
