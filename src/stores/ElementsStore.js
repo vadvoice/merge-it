@@ -10,14 +10,6 @@ const filters = [
   "sepia(1)",
 ];
 
-const iconNames = [
-  "noto-v1:angry-face",
-  "noto-v1:baby",
-  "noto-v1:alien",
-  "noto-v1:anxious-face-with-sweat",
-  "noto-v1:angry-face-with-horns",
-];
-
 const topOffset = 95;
 const distance = 200;
 export const useElementsStore = defineStore("elements", {
@@ -36,7 +28,7 @@ export const useElementsStore = defineStore("elements", {
           filter: filters[i] || filters[0],
           width: 128,
           height: 135,
-          iconName: iconNames[i] || iconNames[0],
+          iconName: iconsList[Math.floor(Math.random() * iconsList.length)]
         }
       }),
   }),
@@ -61,10 +53,11 @@ export const useElementsStore = defineStore("elements", {
       const targetElement = this.getElementById(targetElemId);
       targetElement.iconName = this.onMergeIcons(targetElement.iconName);
     },
-    onMergeIcons(targetIconName) {
-      // get random icon from icons list
-      const icons = iconsList.filter((icon) => icon !== targetIconName);
-      const randomIcon = icons[Math.floor(Math.random() * icons.length)];
+    getRandomIcon() {
+      return iconsList[Math.floor(Math.random() * iconsList.length)];
+    },
+    onMergeIcons() {
+      const randomIcon = this.getRandomIcon();
       return randomIcon;
     },
   },
