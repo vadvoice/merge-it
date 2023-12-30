@@ -58,15 +58,20 @@ function onDrop(element: any) {
 
 <template>
   <div
-    ref="el"
+    v-motion
+    :initial="{ opacity: 0, y: 100 }"
+    :enter="{ opacity: 1, y: 0, scale: 1 }"
+    :hovered="{ scale: 1.2 }"
     :style="style"
     style="position: fixed; user-select: none; cursor: move"
+    ref="el"
     @mouseup="() => onDrop(element)"
   >
     <img
+      class="drop-shadow-sm"
       :style="{
         pointerEvents: 'none',
-        filter: element.filter,
+        filter: `${element.filter} drop-shadow(0 -2mm 4mm rgb(160, 0, 210))`,
         rotate: `${10 * element.id}deg`,
       }"
       src="/liquid.svg"
@@ -74,7 +79,6 @@ function onDrop(element: any) {
       width="128"
     />
     <Icon
-      class="big-icon"
       :icon="element.iconName"
       :style="{
         fontSize: 72,
