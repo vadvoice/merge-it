@@ -5,6 +5,7 @@ import App from './App.vue'
 import 'virtual:uno.css'
 // state manager
 import { createPinia } from 'pinia'
+import '@unocss/reset/normalize.css'
 
 const app = createApp(App);
 const pinia = createPinia();

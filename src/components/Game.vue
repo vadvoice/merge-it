@@ -3,20 +3,17 @@ import DraggableElement from "./DraggableElement.vue";
 import { onMounted, ref } from "vue";
 import { Icon } from "@iconify/vue";
 import { useElementsStore } from "../stores/ElementsStore";
+import { storeToRefs } from 'pinia';
 
 const store = useElementsStore();
 
 defineProps<{ msg: string }>();
-let topOffset = ref(0);
 let loading = ref(true);
-
 const headerEl = ref<HTMLElement | null>(null);
-const distance = 200;
 
-const elements = store.elements
+const {elements} = storeToRefs(store);
 
 onMounted(() => {
-  topOffset.value = headerEl.value?.clientHeight || 95;
   loading.value = false;
 });
 </script>
@@ -26,7 +23,7 @@ onMounted(() => {
   <div v-else class="scene w-full h-full flex flex-col">
     <header ref="headerEl">
       <h1 class="flex justify-center items-center">
-        <Icon icon="mdi-light:home" style="color: red; font-size: inherit" />
+        <Icon icon="noto-v1:angry-face" style="color: red; font-size: inherit" />
         {{ msg }}
       </h1>
     </header>
@@ -34,13 +31,10 @@ onMounted(() => {
     <div class="wrapper" style="position: relative; width: 100%; flex: 1">
       <div
         class="elements-container"
-        v-for="(element, idx) in elements"
+        v-for="element in elements"
         :key="element.id"
       >
-        <DraggableElement
-          :element="element"
-          :initialCoords="{ x: idx * distance, y: topOffset }"
-        />
+        <DraggableElement :element="element" />
       </div>
     </div>
   </div>
