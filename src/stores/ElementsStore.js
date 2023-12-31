@@ -10,26 +10,30 @@ const filters = [
   "sepia(1)",
 ];
 
-const topOffset = 95;
-const distance = 200;
 export const useElementsStore = defineStore("elements", {
   state: () => ({
     iconsList,
-    elements: Array(5)
+    elements: Array(10)
       .fill()
       .map((_, i) => {
-        const randomTopOffset = Math.floor(Math.random() * 100) + topOffset;
+        const elementWidth = 128;
+        const elementHeight = 135;
+        const randomX = Math.floor(
+          Math.random() * (window.innerWidth - elementWidth)
+        );
+        const randomY =
+          Math.floor(Math.random() * (window.innerHeight - elementHeight));
         return {
           id: i,
           name: `echo ${i}`,
-          x: i * distance,
-          y: randomTopOffset,
-          coords: `left: ${i * distance}px; top: ${randomTopOffset}px;`,
+          x: randomX,
+          y: randomY,
+          coords: `left: ${randomX}px; top: ${randomY}px;`,
           filter: filters[i] || filters[0],
           width: 128,
           height: 135,
-          iconName: iconsList[Math.floor(Math.random() * iconsList.length)]
-        }
+          iconName: iconsList[Math.floor(Math.random() * iconsList.length)],
+        };
       }),
   }),
   actions: {
