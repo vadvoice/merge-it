@@ -14,10 +14,12 @@ import { createRouter, createWebHistory } from "vue-router";
 import App from "./App.vue";
 // pages
 import HomePage from "./pages/Home.vue";
+import Builder from "./pages/Builder.vue";
 import AboutPage from "./pages/About.vue";
 
 const routes = [
   { path: "/", component: HomePage },
+  { path: "/build", component: Builder },
   { path: "/about", component: AboutPage },
 ];
 
