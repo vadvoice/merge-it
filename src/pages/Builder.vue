@@ -2,9 +2,11 @@
 import { Icon } from "@iconify/vue";
 import { useBuilderStore } from "../stores/BuilderStore";
 import BuildList from "../components/BuildList.vue";
+import { storeToRefs } from "pinia";
 
 const store = useBuilderStore();
-const { parts, faceState } = store;
+const { parts, faceState } = storeToRefs(store);
+
 const updateFaceState = ({
   elementIndex,
   type,
@@ -19,11 +21,15 @@ const updateFaceState = ({
 <template>
   <div class="builder flex-1 flex flex-col justify-center items-center">
     <div class="builder__panel relative">
-      <Icon :icon="faceState.face" width="300" />
+      <Icon
+        :icon="faceState.face"
+        width="300"
+        :style="{ color: faceState.color }"
+      />
 
-      <Icon :icon="faceState.eyes" width="200" class="absolute top-6 left-12" />
-      <Icon :icon="faceState.nose" width="90" class="absolute top-30 left-25" />
-      <Icon :icon="faceState.lips" width="80" class="absolute top-45 left-27" />
+      <Icon :icon="faceState.eyes" width="150" class="absolute top-13 left-19" />
+      <Icon :icon="faceState.nose" width="50" class="absolute top-35 left-31" />
+      <Icon :icon="faceState.lips" width="50" class="absolute top-47 left-31" />
     </div>
 
     <article class="builder__palette flex flex-wrap relative">

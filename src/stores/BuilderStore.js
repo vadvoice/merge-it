@@ -26,6 +26,14 @@ export const useBuilderStore = defineStore("builder", {
         { iconName: "fluent-emoji-flat:nose-light" },
         { iconName: "fxemoji:nose" },
       ],
+      color: [
+        { color: "#e3e3e3" },
+        { color: "#FFDFC4" },
+        { color: "#F0D5BE" },
+        { color: "#E1B899" },
+        { color: "#C68642" },
+        { color: "#8D5524" },
+      ],
     },
     // TODO: make it prettier
     faceState: {
@@ -33,10 +41,15 @@ export const useBuilderStore = defineStore("builder", {
       eyes: "game-icons:evil-eyes",
       lips: "streamline:mouth-lip-solid",
       nose: "mingcute:nose-line",
+      color: "",
     },
   }),
   actions: {
     updateFaceState({ elementIndex, type }) {
+      if (type === "color") {
+        this.faceState[type] = this.parts[type][elementIndex].color;
+        return;
+      }
       this.faceState[type] = this.parts[type][elementIndex].iconName;
     },
     addElement(element) {

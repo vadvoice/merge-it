@@ -7,6 +7,7 @@ import { Icon } from "@iconify/vue";
 const props = defineProps<{
   element: {
     iconName: string;
+    color: string;
     id: string | number;
   };
 }>();
@@ -22,10 +23,15 @@ const { element } = props;
     :hovered="{ scale: 1.2 }"
   >
     <Icon
+      v-if="element.iconName"
       :icon="element.iconName"
       :style="{
         fontSize: 72,
       }"
     />
+    <div
+      v-if="element.color"
+      :style="{ background: element.color, width: '72px', height: '72px' }"
+    ></div>
   </div>
 </template>

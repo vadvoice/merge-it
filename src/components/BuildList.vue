@@ -11,6 +11,7 @@ const props = defineProps<{
     {
       iconName: string;
       id: number | string;
+      color: string;
     }
   ];
   onElementChange: Function;
