@@ -21,7 +21,9 @@ const { element } = props;
     :initial="{ opacity: 0, y: 100 }"
     :enter="{ opacity: 1, y: 0, scale: 1 }"
     :hovered="{ scale: 1.2 }"
+    :style="{ minWidth: '72px' }"
   >
+    <!-- regular icon -->
     <Icon
       v-if="element.iconName"
       :icon="element.iconName"
@@ -29,9 +31,18 @@ const { element } = props;
         fontSize: 72,
       }"
     />
+    <!-- TODO: could be part of config object -->
     <div
       v-if="element.color"
       :style="{ background: element.color, width: '72px', height: '72px' }"
-    ></div>
+    />
+
+    <Icon
+      v-if="!element.iconName && !element.color"
+      icon="material-symbols:close"
+      :style="{
+        fontSize: 72,
+      }"
+    />
   </div>
 </template>

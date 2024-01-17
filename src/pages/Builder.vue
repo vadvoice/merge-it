@@ -27,6 +27,7 @@ const updateFaceState = ({
         :style="{ color: faceState.color }"
       />
 
+      <Icon :icon="faceState.haircut" width="400" class="absolute -top-20 -left-12" :style="{ zIndex: 1}" />
       <Icon :icon="faceState.eyes" width="150" class="absolute top-13 left-19" />
       <Icon :icon="faceState.nose" width="50" class="absolute top-35 left-31" />
       <Icon :icon="faceState.lips" width="50" class="absolute top-47 left-31" />

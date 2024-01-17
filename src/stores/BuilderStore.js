@@ -7,6 +7,11 @@ export const useBuilderStore = defineStore("builder", {
         { iconName: "mingcute:face-fill" },
         { iconName: "mingcute:face-line" },
       ],
+      haircut: [
+        { iconName: "" },
+        { iconName: "mingcute:hair-fill" },
+        { iconName: "mingcute:hair-2-fill" },
+      ],
       eyes: [
         { iconName: "game-icons:evil-eyes" },
         { iconName: "noto-v1:eyes" },
@@ -38,6 +43,7 @@ export const useBuilderStore = defineStore("builder", {
     // TODO: make it prettier
     faceState: {
       face: "mingcute:face-fill",
+      haircut: "",
       eyes: "game-icons:evil-eyes",
       lips: "streamline:mouth-lip-solid",
       nose: "mingcute:nose-line",

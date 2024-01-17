@@ -46,15 +46,18 @@ watch(position, () => {
 <template>
   <div class="build-list mx-5">
     <div class="build-list__header">
-      <h2 class="build-list__title text-center capitalize color-coolGray">{{ name || "Build List" }}</h2>
+      <h2 class="build-list__title text-center capitalize color-coolGray">
+        {{ name || "Build List" }}
+      </h2>
     </div>
     <div class="build-list__container flex items-center">
-      <div
-        class="build-list__container__action build-list__container__action--left cursor-pointer"
+      <button
+        class="build-list__container__action build-list__container__action--left cursor-pointer b-none b-rounded-50 h-10 w-10 flex items-center justify-center mx-1"
+        :disabled="position === 0"
         @click="() => onPositionChange('left')"
       >
         <Icon icon="raphael:arrowleft" width="24" />
-      </div>
+      </button>
 
       <div
         ref="scrollContainer"
@@ -67,12 +70,13 @@ watch(position, () => {
         />
       </div>
 
-      <div
-        class="build-list__container__action build-list__container__action--right cursor-pointer"
+      <button
+        class="build-list__container__action build-list__container__action--right cursor-pointer b-none b-rounded-50 h-10 w-10 flex items-center justify-center mx-1"
+        :disabled="position === elements.length - 1"
         @click="() => onPositionChange('right')"
       >
         <Icon icon="raphael:arrowright" width="24" />
-      </div>
+      </button>
     </div>
   </div>
 </template>
