@@ -2,6 +2,7 @@
 import { Icon } from "@iconify/vue";
 import BuildItem from "./BuildItem.vue";
 import { ref, watch } from "vue";
+import ColorPicker from "./ColorPicker.vue";
 
 const ELEMENT_WIDTH = 72;
 // get properties from parent
@@ -19,7 +20,17 @@ const props = defineProps<{
 const { elements, name, onElementChange } = props;
 const position = ref(0);
 
+const updateValue = (color: string) => {
+  onElementChange({
+    elementIndex: position.value,
+    part: name,
+    type: "color",
+    value: color,
+  });
+};
+
 const scrollContainer = ref<HTMLElement | null>(null);
+
 const onPositionChange = (direction: string) => {
   if (direction === "left" && position.value > 0) {
     position.value = position.value - 1;
@@ -37,7 +48,7 @@ watch(position, () => {
 
     onElementChange({
       elementIndex: position.value,
-      type: name,
+      part: name,
     });
   }
 });
@@ -70,6 +81,7 @@ watch(position, () => {
         />
       </div>
 
+      <ColorPicker :onChange="updateValue" />
       <button
         class="build-list__container__action build-list__container__action--right cursor-pointer b-none b-rounded-50 h-10 w-10 flex items-center justify-center mx-1"
         :disabled="position === elements.length - 1"

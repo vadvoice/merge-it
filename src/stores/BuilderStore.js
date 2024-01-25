@@ -31,32 +31,38 @@ export const useBuilderStore = defineStore("builder", {
         { iconName: "fluent-emoji-flat:nose-light" },
         { iconName: "fxemoji:nose" },
       ],
-      color: [
-        { color: "#e3e3e3" },
-        { color: "#FFDFC4" },
-        { color: "#F0D5BE" },
-        { color: "#E1B899" },
-        { color: "#C68642" },
-        { color: "#8D5524" },
-      ],
     },
     // TODO: make it prettier
     faceState: {
-      face: "mingcute:face-fill",
-      haircut: "",
-      eyes: "game-icons:evil-eyes",
-      lips: "streamline:mouth-lip-solid",
-      nose: "mingcute:nose-line",
-      color: "",
+      face: {
+        selected: "mingcute:face-fill",
+        color: null,
+      },
+      haircut: {
+        selected: null,
+        color: null,
+      },
+      eyes: {
+        selected: "game-icons:evil-eyes",
+        color: null,
+      },
+      lips: {
+        selected: "streamline:mouth-lip-solid",
+        color: null,
+      },
+      nose: {
+        selected: "mingcute:nose-line",
+        color: null,
+      },
     },
   }),
   actions: {
-    updateFaceState({ elementIndex, type }) {
+    updateFaceState({ elementIndex, part, type, value }) {
       if (type === "color") {
-        this.faceState[type] = this.parts[type][elementIndex].color;
+        this.faceState[part].color = value;
         return;
       }
-      this.faceState[type] = this.parts[type][elementIndex].iconName;
+      this.faceState[part].selected = this.parts[part][elementIndex].iconName;
     },
     addElement(element) {
       this.elements.push(element);

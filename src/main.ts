@@ -10,6 +10,10 @@ import { createPinia } from "pinia";
 import { MotionPlugin } from "@vueuse/motion";
 import { createRouter, createWebHistory } from "vue-router";
 
+// color picker
+import Vue3ColorPicker from "vue3-colorpicker";
+import "vue3-colorpicker/style.css";
+
 // entry point
 import App from "./App.vue";
 // pages
@@ -31,8 +35,6 @@ const router = createRouter({
 const app = createApp(App);
 const pinia = createPinia();
 
-app.use(MotionPlugin);
-app.use(pinia);
-app.use(router);
+app.use(MotionPlugin).use(Vue3ColorPicker).use(pinia).use(router);
 
 app.mount("#app");

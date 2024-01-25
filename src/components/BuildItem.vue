@@ -31,11 +31,6 @@ const { element } = props;
         fontSize: 72,
       }"
     />
-    <!-- TODO: could be part of config object -->
-    <div
-      v-if="element.color"
-      :style="{ background: element.color, width: '72px', height: '72px' }"
-    />
 
     <Icon
       v-if="!element.iconName && !element.color"
