@@ -1,34 +1,37 @@
-<script setup lang="js">
-import { ref } from "vue";
-const cardRef = ref(null);
-const reflRef = ref(null);
+<script setup lang="ts">
+import { ref, computed } from "vue";
+import { useMouseInElement } from '@vueuse/core'
+const target = ref(null)
 
-function onMouseLeave() {
-  const card = cardRef.value;
-  card.style.transform = `perspective(500px) scale(1)`;
-}
+const { elementX, elementY, isOutside, elementHeight, elementWidth } =
+  useMouseInElement(target)
 
-function onMouseMove() {
-  const card = cardRef.value;
+const cardTransform = computed(() => {
+  const MAX_ROTATION = 30;
 
-  const relX = (event.offsetX + 1) / card.offsetWidth;
-  const relY = (event.offsetY + 1) / card.offsetHeight;
-  const rotY = `rotateY(${(relX - 0.5) * 60}deg)`;
-  const rotX = `rotateX(${(relY - 0.5) * -60}deg)`;
-  card.style.transform = `perspective(500px) scale(1) ${rotY} ${rotX}`;
-}
-const scale = (val, inMin, inMax, outMin, outMax) => {
-  outMin + (val - inMin) * (outMax - outMin) / (inMax - inMin)
-}
+  const rX = (
+    MAX_ROTATION / 2 -
+    (elementY.value / elementHeight.value) * MAX_ROTATION
+  ).toFixed(2) // handles x-axis
+
+  const rY = (
+    (elementX.value / elementWidth.value) * MAX_ROTATION -
+    MAX_ROTATION / 2
+  ).toFixed(2) // handles y-axis
+
+  return isOutside.value
+    ? ''
+    : `perspective(${elementWidth.value}px) rotateX(${rX}deg) rotateY(${rY}deg)`
+});
 </script>
 <template>
   <div
     class="card"
-    :href="link"
-    target="_blank"
-    ref="cardRef"
-    @mousemove="onMouseMove"
-    @mouseleave="onMouseLeave"
+    ref="target"
+    :style="{
+      transform: cardTransform,
+      transition: 'transform 0.25s ease-out'
+    }"
   >
     <slot></slot>
   </div>
