@@ -37,33 +37,45 @@ const onElementChange = ({
           <Icon
             :icon="faceState.face.selected"
             :color="faceState.face.color"
-            width="300"
+            :width="faceState.face.size"
           />
 
           <Icon
+            class="absolute -top-20 -left-12"
             :icon="faceState.haircut.selected"
             :color="faceState.haircut.color"
-            width="400"
-            class="absolute -top-20 -left-12"
-            :style="{ zIndex: 1 }"
+            :width="faceState.haircut.size"
+            :style="{
+              zIndex: 1,
+              left: faceState.face.size / 2 - faceState.haircut.size / 2 + 'px',
+            }"
           />
           <Icon
+            class="absolute top-13"
             :icon="faceState.eyes.selected"
             :color="faceState.eyes.color"
-            width="150"
-            class="absolute top-13 left-19"
+            :width="faceState.eyes.size"
+            :style="{
+              left: faceState.face.size / 2 - faceState.eyes.size / 2 + 'px',
+            }"
           />
           <Icon
+            class="absolute top-35"
             :icon="faceState.nose.selected"
             :color="faceState.nose.color"
-            width="50"
-            class="absolute top-35 left-31"
+            :width="faceState.nose.size"
+            :style="{
+              left: faceState.face.size / 2 - faceState.nose.size / 2 + 'px',
+            }"
           />
           <Icon
+            class="absolute top-47"
             :icon="faceState.lips.selected"
             :color="faceState.lips.color"
-            width="50"
-            class="absolute top-47 left-31"
+            :width="faceState.lips.size"
+            :style="{
+              left: faceState.face.size / 2 - faceState.lips.size / 2 + 'px',
+            }"
           />
         </div>
       </MotionCard>
@@ -72,6 +84,8 @@ const onElementChange = ({
     <article class="builder__palette flex flex-wrap relative">
       <BuildList
         v-for="collectionName in Object.keys(parts)"
+        :key="collectionName"
+        :faceState="faceState"
         :elements="parts[collectionName]"
         :name="collectionName"
         :onElementChange="onElementChange"

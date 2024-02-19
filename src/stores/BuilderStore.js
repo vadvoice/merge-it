@@ -37,22 +37,32 @@ export const useBuilderStore = defineStore("builder", {
       face: {
         selected: "mingcute:face-fill",
         color: null,
+        size: 300,
+        defaultSize: 300,
       },
       haircut: {
         selected: null,
         color: null,
+        size: 400,
+        defaultSize: 400,
       },
       eyes: {
         selected: "game-icons:evil-eyes",
         color: null,
+        size: 150,
+        defaultSize: 150,
       },
       lips: {
         selected: "streamline:mouth-lip-solid",
         color: null,
+        size: 50,
+        defaultSize: 50,
       },
       nose: {
         selected: "mingcute:nose-line",
         color: null,
+        size: 50,
+        defaultSize: 50,
       },
     },
   }),
@@ -60,6 +70,10 @@ export const useBuilderStore = defineStore("builder", {
     updateFaceState({ elementIndex, part, type, value }) {
       if (type === "color") {
         this.faceState[part].color = value;
+        return;
+      }
+      if (type === 'size') {
+        this.faceState[part].size = value;
         return;
       }
       this.faceState[part].selected = this.parts[part][elementIndex].iconName;

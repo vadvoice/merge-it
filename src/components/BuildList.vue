@@ -8,6 +8,14 @@ const ELEMENT_WIDTH = 72;
 // get properties from parent
 const props = defineProps<{
   name: string;
+  faceState: {
+    [key: string]: {
+      selected: string;
+      color: string;
+      size: number;
+      defaultSize: number;
+    };
+  };
   elements: [
     {
       iconName: string;
@@ -17,8 +25,10 @@ const props = defineProps<{
   ];
   onElementChange: Function;
 }>();
-const { elements, name, onElementChange } = props;
+const { elements, name, onElementChange, faceState } = props;
+const elementSetup = faceState[name];
 const position = ref(0);
+const size = ref(elementSetup.size);
 
 const updateValue = (color: string) => {
   onElementChange({
@@ -39,6 +49,14 @@ const onPositionChange = (direction: string) => {
     position.value = position.value + 1;
   }
 };
+watch(size, (newSize) => {
+  onElementChange({
+    elementIndex: position.value,
+    part: name,
+    type: "size",
+    value: newSize,
+  });
+});
 watch(position, () => {
   if (scrollContainer.value) {
     scrollContainer.value.scrollTo({
@@ -80,8 +98,6 @@ watch(position, () => {
           :element="element"
         />
       </div>
-
-      <ColorPicker :onChange="updateValue" />
       <button
         class="build-list__container__action build-list__container__action--right cursor-pointer b-none b-rounded-50 h-10 w-10 flex items-center justify-center mx-1"
         :disabled="position === elements.length - 1"
@@ -89,6 +105,20 @@ watch(position, () => {
       >
         <Icon icon="raphael:arrowright" width="24" />
       </button>
+    </div>
+    <div class="flex justify-between">
+      <span class="text-sm">Color:</span>
+      <ColorPicker :onChange="updateValue" />
+    </div>
+
+    <div class="flex justify-between">
+      <span class="text-sm">Size:</span>
+      <input
+        type="range"
+        min="0"
+        :max="elementSetup.defaultSize + 50"
+        v-model="size"
+      />
     </div>
   </div>
 </template>
