@@ -8,7 +8,7 @@ import "@unocss/reset/normalize.css";
 // state manager
 import { createPinia } from "pinia";
 import { MotionPlugin } from "@vueuse/motion";
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 
 // color picker
 import Vue3ColorPicker from "vue3-colorpicker";
@@ -28,7 +28,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes,
 });
 
