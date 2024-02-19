@@ -1,9 +1,10 @@
 {
-  "name": "my-vue-app",
+  "name": "merge-it",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "main": "docs/index.html",
+  "version": "0.0.1",
+  "type": "commonjs",
+  "main": "src/main.ts",
+  "homepage": "https://vadvoice.github.io/merge-it",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
