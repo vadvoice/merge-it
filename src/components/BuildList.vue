@@ -115,8 +115,8 @@ watch(position, () => {
       <span class="text-sm">Size:</span>
       <input
         type="range"
-        min="0"
-        :max="elementSetup.defaultSize + 50"
+        :min="elementSetup.defaultSize - 20"
+        :max="elementSetup.defaultSize + 20"
         v-model="size"
       />
     </div>
