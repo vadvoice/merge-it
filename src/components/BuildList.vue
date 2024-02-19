@@ -16,13 +16,11 @@ const props = defineProps<{
       defaultSize: number;
     };
   };
-  elements: [
-    {
-      iconName: string;
-      id: number | string;
-      color: string;
-    }
-  ];
+  elements: {
+    [x: string]: any;
+    iconName: string;
+    color: string;
+  }[];
   onElementChange: Function;
 }>();
 const { elements, name, onElementChange, faceState } = props;
@@ -95,7 +93,7 @@ watch(position, () => {
         <BuildItem
           v-for="element in elements"
           :key="element.id"
-          :element="element"
+          :element="{ ...element, id: element.id || '' }"
         />
       </div>
       <button

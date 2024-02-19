@@ -2,65 +2,80 @@ import { defineStore } from "pinia";
 
 export const useBuilderStore = defineStore("builder", {
   state: () => ({
-    parts: {
-      face: [
-        { iconName: "mingcute:face-fill" },
-        { iconName: "mingcute:face-line" },
-      ],
-      haircut: [
-        { iconName: "" },
-        { iconName: "mingcute:hair-fill" },
-        { iconName: "mingcute:hair-2-fill" },
-      ],
-      eyes: [
-        { iconName: "game-icons:evil-eyes" },
-        { iconName: "noto-v1:eyes" },
-        { iconName: "emojione:eyes" },
-      ],
-      lips: [
-        { iconName: "streamline:mouth-lip-solid" },
-        { iconName: "fxemoji:lips" },
-        { iconName: "game-icons:lips" },
-        { iconName: "streamline-emojis:mouth" },
-        { iconName: "icon-park-outline:mouth" },
-        { iconName: "streamline:mouth-lip-solid" },
-      ],
-      nose: [
-        { iconName: "mingcute:nose-line" },
-        { iconName: "openmoji:nose-medium-skin-tone" },
-        { iconName: "fluent-emoji-flat:nose-light" },
-        { iconName: "fxemoji:nose" },
-      ],
-    },
+    parts: [
+      {
+        name: "face",
+        items: [
+          { iconName: "mingcute:face-fill" },
+          { iconName: "mingcute:face-line" },
+        ],
+      },
+      {
+        name: "haircut",
+        items: [
+          { iconName: "" },
+          { iconName: "mingcute:hair-fill" },
+          { iconName: "mingcute:hair-2-fill" },
+        ],
+      },
+      {
+        name: "eyes",
+        items: [
+          { iconName: "game-icons:evil-eyes" },
+          { iconName: "noto-v1:eyes" },
+          { iconName: "emojione:eyes" },
+        ],
+      },
+      {
+        name: "lips",
+        items: [
+          { iconName: "streamline:mouth-lip-solid" },
+          { iconName: "fxemoji:lips" },
+          { iconName: "game-icons:lips" },
+          { iconName: "streamline-emojis:mouth" },
+          { iconName: "icon-park-outline:mouth" },
+          { iconName: "streamline:mouth-lip-solid" },
+        ],
+      },
+      {
+        name: "nose",
+        items: [
+          { iconName: "mingcute:nose-line" },
+          { iconName: "openmoji:nose-medium-skin-tone" },
+          { iconName: "fluent-emoji-flat:nose-light" },
+          { iconName: "fxemoji:nose" },
+        ],
+      },
+    ],
     // TODO: make it prettier
     faceState: {
       face: {
         selected: "mingcute:face-fill",
-        color: null,
+        color: "",
         size: 300,
         defaultSize: 300,
       },
       haircut: {
-        selected: null,
-        color: null,
+        selected: "",
+        color: "",
         size: 400,
         defaultSize: 400,
       },
       eyes: {
         selected: "game-icons:evil-eyes",
-        color: null,
+        color: "",
         size: 150,
         defaultSize: 150,
       },
       lips: {
         selected: "streamline:mouth-lip-solid",
-        color: null,
+        color: "",
         size: 50,
         defaultSize: 50,
       },
       nose: {
         selected: "mingcute:nose-line",
-        color: null,
+        color: "",
         size: 50,
         defaultSize: 50,
       },
@@ -72,11 +87,15 @@ export const useBuilderStore = defineStore("builder", {
         this.faceState[part].color = value;
         return;
       }
-      if (type === 'size') {
+      if (type === "size") {
         this.faceState[part].size = value;
         return;
       }
-      this.faceState[part].selected = this.parts[part][elementIndex].iconName;
+      // const selected = this.faceState[part].selected;
+      console.log(this.parts.find((p) => p.name === part));
+      this.faceState[part].selected = this.parts.find(
+        (p) => p.name === part
+      ).items[elementIndex].iconName;
     },
     addElement(element) {
       this.elements.push(element);

@@ -5,8 +5,7 @@ import BuildList from "../components/BuildList.vue";
 import MotionCard from "../components/MotionCard.vue";
 import { storeToRefs } from "pinia";
 
-import * as htmlToImage from "html-to-image";
-import { toPng, toJpeg, toBlob, toPixelData, toSvg } from "html-to-image";
+import { toPng } from "html-to-image";
 
 const store = useBuilderStore();
 const { parts, faceState } = storeToRefs(store);
@@ -27,7 +26,7 @@ const onElementChange = ({
 
 const onDownload = () => {
   const node = document.querySelector(".builder__panel__face");
-  htmlToImage.toPng(node as HTMLElement).then(function (dataUrl) {
+  toPng(node as HTMLElement).then(function (dataUrl) {
     var link = document.createElement("a");
     link.download = "my-image-name.png";
     link.href = dataUrl;
@@ -39,7 +38,10 @@ const onDownload = () => {
 <template>
   <div class="builder flex-1 flex flex-col justify-center items-center">
     <article class="absolute top-13 left-19">
-      <button class="border-none border-rounded bg-sky cursor-pointer p-2" @click="onDownload">
+      <button
+        class="border-none border-rounded bg-sky cursor-pointer p-2"
+        @click="onDownload"
+      >
         Download
         <Icon icon="akar-icons:download" />
       </button>
@@ -99,14 +101,13 @@ const onDownload = () => {
         </div>
       </MotionCard>
     </div>
-
     <article class="builder__palette flex flex-wrap relative">
       <BuildList
-        v-for="collectionName in Object.keys(parts)"
-        :key="collectionName"
+        v-for="collection in parts"
+        :key="collection.name"
         :faceState="faceState"
-        :elements="parts[collectionName]"
-        :name="collectionName"
+        :elements="collection.items.map(item => ({ ...item, id: item.iconName, color: '' }))"
+        :name="collection.name"
         :onElementChange="onElementChange"
       />
     </article>
