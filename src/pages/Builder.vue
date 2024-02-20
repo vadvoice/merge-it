@@ -37,15 +37,6 @@ const onDownload = () => {
 
 <template>
   <div class="builder flex-1 flex flex-col justify-center items-center">
-    <article class="absolute top-13 left-19">
-      <button
-        class="border-none border-rounded bg-sky cursor-pointer p-2"
-        @click="onDownload"
-      >
-        Download
-        <Icon icon="akar-icons:download" />
-      </button>
-    </article>
     <div class="builder__panel relative">
       <MotionCard>
         <div
@@ -101,15 +92,30 @@ const onDownload = () => {
         </div>
       </MotionCard>
     </div>
-    <article class="builder__palette flex flex-wrap relative">
+    <article class="builder__palette flex relative overflow-scroll w-full">
       <BuildList
         v-for="collection in parts"
         :key="collection.name"
         :faceState="faceState"
-        :elements="collection.items.map(item => ({ ...item, id: item.iconName, color: '' }))"
+        :elements="
+          collection.items.map((item) => ({
+            ...item,
+            id: item.iconName,
+            color: '',
+          }))
+        "
         :name="collection.name"
         :onElementChange="onElementChange"
       />
     </article>
   </div>
+  <article class="flex justify-center p-6">
+    <button
+      class="border-none border-rounded bg-sky cursor-pointer p-2"
+      @click="onDownload"
+    >
+      Download
+      <Icon icon="akar-icons:download" />
+    </button>
+  </article>
 </template>

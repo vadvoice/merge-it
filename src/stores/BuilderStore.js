@@ -91,8 +91,6 @@ export const useBuilderStore = defineStore("builder", {
         this.faceState[part].size = value;
         return;
       }
-      // const selected = this.faceState[part].selected;
-      console.log(this.parts.find((p) => p.name === part));
       this.faceState[part].selected = this.parts.find(
         (p) => p.name === part
       ).items[elementIndex].iconName;

@@ -6,7 +6,7 @@ const count = ref(0);
 </script>
 
 <template>
-  <header class="app-header flex w-full justify-center">
+  <header class="app-header flex w-full justify-center z-1">
     <nav class="p-2">
       <router-link
         class="color-white decoration-none"
