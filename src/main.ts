@@ -17,13 +17,13 @@ import "vue3-colorpicker/style.css";
 // entry point
 import App from "./App.vue";
 // pages
-import HomePage from "./pages/Home.vue";
+import Randomize from "./pages/Randomize.vue";
 import Builder from "./pages/Builder.vue";
 import AboutPage from "./pages/About.vue";
 
 const routes = [
-  { path: "/", component: HomePage },
-  { path: "/build", component: Builder },
+  { path: "/", component: Builder },
+  { path: "/build", component: Randomize },
   { path: "/about", component: AboutPage },
 ];
 
