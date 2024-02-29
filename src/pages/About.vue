@@ -1,8 +1,8 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="flex flex-col justify-between">
-    <div class="mx-10">
+  <div class="flex flex-col justify-between items-between flex-1">
+    <div v-motion-pop class="mx-10">
       <h1 class="text-center flex flex-col items-center justify-center">
         <img alt="Merge It!" src="../assets/logo-full.png" width="100" />
         Merge it!
@@ -14,8 +14,8 @@
         background color. You can also download the avatar you created.
       </p>
 
-      <h2 class="text-center">How to play</h2>
-      <ul>
+      <h2 class="text-center">Usage</h2>
+      <ul >
         <li>
           In the future, we plan to add more options for creating an avatar, as
           well as the ability to share your avatar on social networks.
@@ -26,10 +26,10 @@
       </ul>
     </div>
 
-    <footer>
-      <p class="text-center">
+    <footer v-motion-slide-top>
+      <p class="text-center text-sm">
         The game was created using Vue 3, Tailwind CSS, and Vite. It uses the
-        <a href="https://iconify.design/">Iconify</a> library to display the
+        <a href="https://iconify.design/" target="_blank">Iconify</a> library to display the
         icons.
       </p>
     </footer>
