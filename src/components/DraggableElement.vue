@@ -74,7 +74,7 @@ function onDrop(element: any) {
         filter: `${element.filter} drop-shadow(0 -2mm 4mm rgb(160, 0, 210))`,
         rotate: `${10 * element.id}deg`,
       }"
-      src="/liquid.svg"
+      src="../assets/liquid.svg"
       alt="Vue logo"
       width="128"
     />
