@@ -120,5 +120,22 @@ export const useBuilderStore = defineStore("builder", {
         (element) => element.id !== elementId
       );
     },
+    shuffleBasicFaceConfig() {
+      this.faceState.face.selected = this.parts[0].items[
+        Math.floor(Math.random() * this.parts[0].items.length)
+      ].iconName;
+      this.faceState.haircut.selected = this.parts[1].items[
+        Math.floor(Math.random() * this.parts[1].items.length)
+      ].iconName;
+      this.faceState.eyes.selected = this.parts[2].items[
+        Math.floor(Math.random() * this.parts[2].items.length)
+      ].iconName;
+      this.faceState.lips.selected = this.parts[3].items[
+        Math.floor(Math.random() * this.parts[3].items.length)
+      ].iconName;
+      this.faceState.nose.selected = this.parts[4].items[
+        Math.floor(Math.random() * this.parts[4].items.length)
+      ].iconName;
+    }
   },
 });

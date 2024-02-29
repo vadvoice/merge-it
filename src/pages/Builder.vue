@@ -116,13 +116,22 @@ const onDownload = () => {
       />
     </article>
   </div>
-  <article class="flex justify-center p-6">
+  <article class="flex justify-center p-6 gap-2">
     <button
-      class="border-none border-rounded bg-sky cursor-pointer p-2"
+      class="border-none border-rounded bg-sky cursor-pointer p-2 flex items-center gap-1"
+      title="Download the face as an image"
       @click="onDownload"
     >
       Download
       <Icon icon="akar-icons:download" />
+    </button>
+    <button
+      class="border-none border-rounded bg-yellow cursor-pointer p-2 flex items-center gap-1"
+      title="Randomize the face configuration"
+      @click="() => store.shuffleBasicFaceConfig()"
+    >
+      Shuffle
+      <Icon icon="ph:shuffle-light" />
     </button>
   </article>
 </template>
