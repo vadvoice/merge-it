@@ -17,11 +17,6 @@ const { element } = props;
 <template>
   <div
     ref="draggableEl"
-    v-motion
-    :initial="{ opacity: 0, y: 100 }"
-    :enter="{ opacity: 1, y: 0, scale: 1 }"
-    :hovered="{ scale: 1.2 }"
-    :style="{ minWidth: '72px' }"
   >
     <!-- regular icon -->
     <Icon

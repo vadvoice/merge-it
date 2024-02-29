@@ -14,6 +14,7 @@ const props = defineProps<{
       color: string;
       size: number;
       defaultSize: number;
+      isVisible: boolean;
     };
   };
   elements: {
@@ -27,6 +28,7 @@ const { elements, name, onElementChange, faceState } = props;
 const elementSetup = faceState[name];
 const position = ref(0);
 const size = ref(elementSetup.size);
+const isVisible = ref(elementSetup.isVisible || false);
 
 const updateValue = (color: string) => {
   onElementChange({
@@ -68,6 +70,15 @@ watch(position, () => {
     });
   }
 });
+
+watch(isVisible, (newIsVisible) => {
+  onElementChange({
+    elementIndex: position.value,
+    part: name,
+    type: "visibility",
+    value: newIsVisible,
+  });
+});
 </script>
 
 <template>
@@ -104,19 +115,35 @@ watch(position, () => {
         <Icon icon="raphael:arrowright" width="24" />
       </button>
     </div>
-    <div class="flex justify-between">
-      <span class="text-sm">Color:</span>
-      <ColorPicker :onChange="updateValue" />
-    </div>
 
-    <div class="flex justify-between">
-      <span class="text-sm">Size:</span>
-      <input
-        type="range"
-        :min="elementSetup.defaultSize - 20"
-        :max="elementSetup.defaultSize + 20"
-        v-model="size"
-      />
+    <div class="actions flex flex-col gap-1 mt-5">
+      <div class="flex justify-between">
+        <span class="text-sm">Fill color:</span>
+        <ColorPicker :onChange="updateValue" />
+      </div>
+      <div class="flex justify-between">
+        <span class="text-sm">Size:</span>
+        <input
+          type="range"
+          :min="elementSetup.defaultSize - 20"
+          :max="elementSetup.defaultSize + 20"
+          v-model="size"
+        />
+      </div>
+      <div class="flex justify-between">
+        <label
+          class="text-sm select-none"
+          :for="name"
+          :title="!isVisible ? 'No visible' : ''"
+        >
+          <Icon
+            v-if="!isVisible"
+            icon="fluent-emoji:warning"
+            title="Not visible"
+          />Is visible :
+        </label>
+        <input class="w-10" type="checkbox" :id="name" v-model="isVisible" />
+      </div>
     </div>
   </div>
 </template>

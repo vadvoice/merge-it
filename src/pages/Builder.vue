@@ -41,12 +41,15 @@ const onDownload = () => {
       <MotionCard>
         <div
           v-motion
-          class="builder__panel__face"
+          class="builder__panel__face min-h-86"
           :initial="{
             opacity: 1,
           }"
         >
           <Icon
+            :style="{
+              visibility: faceState.face.isVisible ? 'visible' : 'hidden',
+            }"
             :icon="faceState.face.selected"
             :color="faceState.face.color"
             :width="faceState.face.size"
@@ -60,6 +63,7 @@ const onDownload = () => {
             :style="{
               zIndex: 1,
               left: faceState.face.size / 2 - faceState.haircut.size / 2 + 'px',
+              visibility: faceState.haircut.isVisible ? 'visible' : 'hidden',
             }"
           />
           <Icon
@@ -69,6 +73,7 @@ const onDownload = () => {
             :width="faceState.eyes.size"
             :style="{
               left: faceState.face.size / 2 - faceState.eyes.size / 2 + 'px',
+              visibility: faceState.eyes.isVisible ? 'visible' : 'hidden',
             }"
           />
           <Icon
@@ -78,6 +83,7 @@ const onDownload = () => {
             :width="faceState.nose.size"
             :style="{
               left: faceState.face.size / 2 - faceState.nose.size / 2 + 'px',
+              visibility: faceState.nose.isVisible ? 'visible' : 'hidden',
             }"
           />
           <Icon
@@ -87,6 +93,7 @@ const onDownload = () => {
             :width="faceState.lips.size"
             :style="{
               left: faceState.face.size / 2 - faceState.lips.size / 2 + 'px',
+              visibility: faceState.lips.isVisible ? 'visible' : 'hidden',
             }"
           />
         </div>
