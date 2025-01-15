@@ -84,7 +84,7 @@ watch(isVisible, (newIsVisible) => {
 <template>
   <div class="build-list mx-5">
     <div class="build-list__header">
-      <h2 class="build-list__title text-center capitalize color-coolGray">
+      <h2 class="build-list__title text-center capitalize text-sm">
         {{ name || "Build List" }}
       </h2>
     </div>

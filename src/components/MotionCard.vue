@@ -33,6 +33,6 @@ const cardTransform = computed(() => {
       transition: 'transform 0.25s ease-out'
     }"
   >
-    <slot></slot>
+    <slot />
   </div>
 </template>

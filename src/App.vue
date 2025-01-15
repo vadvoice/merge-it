@@ -29,5 +29,7 @@ const baseNavItemClassName =
     </div>
 
   </header>
-  <router-view></router-view>
+  <div class="flex-1 flex flex-col items-center mt-12">
+    <router-view></router-view>
+  </div>
 </template>

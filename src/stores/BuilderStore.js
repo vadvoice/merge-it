@@ -7,9 +7,6 @@ export const useBuilderStore = defineStore("builder", {
         name: "face",
         items: [
           { iconName: "mingcute:face-fill" },
-          { iconName: "bxs:face" },
-          { iconName: "ic:round-face-2" },
-          { iconName: "ic:round-face-3" },
           { iconName: "iconamoon:face-without-mouth-fill" },
         ],
       },
